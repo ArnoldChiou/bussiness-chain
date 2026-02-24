@@ -1,12 +1,25 @@
 import { reactive, ref } from 'vue'
 
-export const money = ref(1000)
+export const money = ref(100000)
 
 export const resources = reactive({
     power: 0,
     iron: 0,
     steel: 0
 })
+
+export const worldMap = reactive(Array(9).fill(null))
+
+export const buildOnMap = (index, factoryType) => {
+    const cost = getFactoryCost(factoryType)
+    if (money.value >= cost && worldMap[index] === null) {
+        money.value -= cost
+        worldMap[index] = factoryType
+        factories[factoryType].count++
+        return true
+    }
+    return false
+}
 
 export const factories = reactive({
     powerPlant: { count: 1, baseCost: 500, costMultiplier: 1.15, name: '發電廠' },

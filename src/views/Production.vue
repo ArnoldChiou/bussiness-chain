@@ -1,7 +1,5 @@
 <script setup>
-import { money, factories, buyFactory, getFactoryCost } from '../store/game.js'
-
-const formatNumber = (num) => Math.floor(num).toLocaleString()
+import { factories } from '../store/game.js'
 
 const formatYield = (type) => {
   if (type === 'powerPlant') return '+2 電力 / 秒'
@@ -19,7 +17,7 @@ const formatYield = (type) => {
       <div v-for="(factory, key) in factories" :key="key" 
            class="bg-slate-800/50 hover:bg-slate-800 p-5 rounded-xl border border-slate-700/50 transition-colors flex flex-col justify-between h-full group">
         
-        <div class="mb-5">
+        <div>
           <div class="flex justify-between items-start mb-2">
             <h3 class="text-lg font-bold text-slate-100 group-hover:text-amber-400 transition-colors">
               {{ factory.name }}
@@ -32,20 +30,6 @@ const formatYield = (type) => {
             <span class="text-slate-500">產能</span> {{ formatYield(key) }}
           </div>
         </div>
-
-        <button 
-          @click="buyFactory(key)"
-          :disabled="money < getFactoryCost(key)"
-          class="w-full py-3 rounded-xl font-bold text-sm transition-all duration-200 active:scale-95 shadow-lg flex justify-between items-center px-5"
-          :class="money >= getFactoryCost(key) 
-            ? 'bg-linear-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white shadow-indigo-500/25 border border-indigo-500/50' 
-            : 'bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed shadow-none'"
-        >
-          <span>擴建工廠</span>
-          <span class="font-mono bg-black/20 px-2 py-0.5 rounded ml-2">
-            ${{ formatNumber(getFactoryCost(key)) }}
-          </span>
-        </button>
 
       </div>
     </div>

@@ -2,13 +2,15 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 import Production from '../views/Production.vue'
 import Market from '../views/Market.vue'
+import MapView from '../views/MapView.vue'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '/', component: Dashboard },
         { path: '/production', component: Production },
-        { path: '/market', component: Market }
+        { path: '/market', component: Market },
+        { path: '/map', component: MapView }
     ]
 })
 
